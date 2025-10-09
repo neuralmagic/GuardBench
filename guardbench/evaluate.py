@@ -6,6 +6,7 @@ from sklearn.metrics import (
     average_precision_score,
     confusion_matrix,
     f1_score,
+    matthews_corrcoef,
     precision_score,
     recall_score,
 )
@@ -19,7 +20,7 @@ def false_negative_rate(fn: int, tp: int) -> float:
     return fn / (fn + tp) if (fn + tp) > 0 else 0.0
 
 
-def evaluate(y_true: dict, y_pred_prob: dict) -> dict:
+def evaluate(y_true: dict, y_pred_prob: dict, threshold: float = 0.5) -> dict:
     warnings.filterwarnings("ignore", category=UndefinedMetricWarning)
 
     if not set(y_true) == set(y_pred_prob):
@@ -30,12 +31,20 @@ def evaluate(y_true: dict, y_pred_prob: dict) -> dict:
 
     y_true = list(y_true.values())
     y_pred_prob = list(y_pred_prob.values())
-    y_pred_binary = [x > 0.5 for x in y_pred_prob]
+    y_pred_binary = [x > threshold for x in y_pred_prob]
+
+    p = sum(y_true)
+    n = len(y_true) - sum(y_true)
 
     precision = precision_score(y_true, y_pred_binary, zero_division=0.0)
     recall = recall_score(y_true, y_pred_binary, zero_division=0.0)
     f1 = f1_score(y_true, y_pred_binary, zero_division=0.0)
-    auprc = average_precision_score(y_true, y_pred_prob)
+
+    if all(not y for y in y_true) and all(not y for y in y_pred_binary):
+        auprc = 0.0
+    else:
+        auprc = average_precision_score(y_true, y_pred_prob)
+
     tn, fp, fn, tp = confusion_matrix(
         y_true, y_pred_binary, labels=[False, True]
     ).ravel()
@@ -45,18 +54,47 @@ def evaluate(y_true: dict, y_pred_prob: dict) -> dict:
     fpr = false_positive_rate(fp, tn)
     fnr = false_negative_rate(fn, tp)
 
+    if all(y for y in y_true) and all(y for y in y_pred_binary):
+        mcc = 0.0
+    elif all(not y for y in y_true) and all(not y for y in y_pred_binary):
+        mcc = 0.0
+    else:
+        mcc = matthews_corrcoef(y_true, y_pred_binary)
+
     return {
-        "precision": precision if tn > 0 else 0.0,
-        "recall": recall,
-        "f1": f1,
-        "auprc": auprc if tn > 0 else 0.0,
-        "sensitivity": sensitivity,
-        "specificity": specificity,
-        "g_mean": g_mean,
-        "fpr": fpr,
-        "fnr": fnr,
-        "tn": tn,
-        "fp": fp,
-        "fn": fn,
-        "tp": tp,
+        "precision": float(precision) if n > 0 else 0.0,
+        "recall": float(recall),
+        "f1": float(f1) if n > 0 else 0.0,
+        "mcc": float(mcc) if n > 0 else 0.0,
+        "auprc": float(auprc) if n > 0 else 0.0,
+        "sensitivity": float(sensitivity),
+        "specificity": float(specificity) if n > 0 else 0.0,
+        "g_mean": float(g_mean) if n > 0 else 0.0,
+        "fpr": float(fpr),
+        "fnr": float(fnr),
+        "tn": float(tn),
+        "fp": float(fp),
+        "fn": float(fn),
+        "tp": float(tp),
+        "p": p,
+        "n": n,
     }
+
+
+def list_metrics():
+    return [
+        "precision",
+        "recall",
+        "f1",
+        "mcc",
+        "auprc",
+        "sensitivity",
+        "specificity",
+        "g_mean",
+        "fpr",
+        "fnr",
+        "tn",
+        "fp",
+        "fn",
+        "tp",
+    ]
