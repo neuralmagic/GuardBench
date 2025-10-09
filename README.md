@@ -17,6 +17,10 @@
 
 # GuardBench
 
+## 🔥 News
+
+- [October 9, 2025] GuardBench now supports four additional datasets: [JBB Behaviors](https://huggingface.co/datasets/JailbreakBench/JBB-Behaviors), [NicheHazardQA](https://huggingface.co/datasets/SoftMINER-Group/NicheHazardQA), [HarmEval](https://huggingface.co/datasets/SoftMINER-Group/HarmEval), and [TechHazardQA](https://huggingface.co/datasets/SoftMINER-Group/TechHazardQA). Also, it now allows for choosing the metrics to show at the end of the evaluation. Supported metrics are: `precision` (Precision), `recall` (Recall), `f1` (F1), `mcc` (Matthews Correlation Coefficient), `auprc` (AUPRC), `sensitivity` (Sensitivity), `specificity` (Specificity), `g_mean` (G-Mean), `fpr` (False Positive Rate), `fnr` (False Negative Rate).
+
 ## ⚡️ Introduction
 [`GuardBench`](https://github.com/AmenRa/guardbench) is a Python library for the evaluation of guardrail models, i.e., LLMs fine-tuned to detect unsafe content in human-AI interactions.
 [`GuardBench`](https://github.com/AmenRa/guardbench) provides a common interface to 40 evaluation datasets, which are downloaded and converted into a [standardized format](docs/data_format.md) for improved usability.
@@ -65,8 +69,9 @@ def moderate(
 benchmark(
     moderate=moderate,  # User-defined moderation function
     model_name="My Guardrail Model",
-    batch_size=32,
-    datasets="all", 
+    batch_size=1,              # Default value
+    datasets="all",            # Default value
+    metrics=["f1", "recall"],  # Default value
     # Note: you can pass additional `kwargs` for `moderate`
 )
 ```
