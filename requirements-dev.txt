@@ -2,8 +2,14 @@ bandit
 black
 black[jupyter]
 blackdoc
+ipython
 isort
+jupyter
+mkdocs
+mkdocstrings
+mkdocstrings-python
 mypy
+notebook
 pip-licenses
 pytest
 pytest-cov
