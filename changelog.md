@@ -19,3 +19,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - `evaluate` now also compute Matthews Correlation Coefficient (MCC) score.
 - `benchmark` now allows for choosing the metrics to show at the end of the evaluation. Supported metrics are: `precision` (Precision), `recall` (Recall), `f1` (F1), `mcc` (Matthews Correlation Coefficient), `auprc` (AUPRC), `sensitivity` (Sensitivity), `specificity` (Specificity), `g_mean` (G-Mean), `fpr` (False Positive Rate), `fnr` (False Negative Rate).
+- `benchmark`'s `batch_size` parameter now defaults to 1.
