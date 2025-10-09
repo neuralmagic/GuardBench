@@ -106,6 +106,25 @@ convabuse = """@inproceedings{convabuse,
   timestamp    = {Fri, 16 Feb 2024 08:27:36 +0100},
 }"""
 
+harm_eval = """@inproceedings{harm_eval,
+  author       = {Somnath Banerjee and
+                  Sayan Layek and
+                  Soham Tripathy and
+                  Shanu Kumar and
+                  Animesh Mukherjee and
+                  Rima Hazra},
+  title        = {SafeInfer: Context Adaptive Decoding Time Safety Alignment for Large
+                  Language Models},
+  booktitle    = {AAAI-25, Sponsored by the Association for the Advancement of Artificial
+                  Intelligence, February 25 - March 4, 2025, Philadelphia, PA, {USA}},
+  pages        = {27188--27196},
+  publisher    = {{AAAI} Press},
+  year         = {2025},
+  url          = {https://doi.org/10.1609/aaai.v39i26.34927},
+  doi          = {10.1609/AAAI.V39I26.34927},
+  timestamp    = {Thu, 17 Apr 2025 17:08:58 +0200},
+}"""
+
 harmful_q = """@inproceedings{harmful_q,
   author       = {Omar Shaikh and
                   Hongxin Zhang and
@@ -452,6 +471,29 @@ implicit_hate_corpus = """@inproceedings{implicit_hate_corpus,
   timestamp    = {Fri, 16 Feb 2024 08:27:36 +0100},
 }"""
 
+jbb_behaviors = """jbb_behaviors,
+  author       = {Patrick Chao and
+                  Edoardo Debenedetti and
+                  Alexander Robey and
+                  Maksym Andriushchenko and
+                  Francesco Croce and
+                  Vikash Sehwag and
+                  Edgar Dobriban and
+                  Nicolas Flammarion and
+                  George J. Pappas and
+                  Florian Tram{\`{e}}r and
+                  Hamed Hassani and
+                  Eric Wong},
+  title        = {JailbreakBench: An Open Robustness Benchmark for Jailbreaking Large
+                  Language Models},
+  booktitle    = {Advances in Neural Information Processing Systems 38: Annual Conference
+                  on Neural Information Processing Systems 2024, NeurIPS 2024, Vancouver,
+                  BC, Canada, December 10 - 15, 2024},
+  year         = {2024},
+  url          = {http://papers.nips.cc/paper\_files/paper/2024/hash/63092d79154adebd7305dfd498cbff70-Abstract-Datasets\_and\_Benchmarks\_Track.html},
+  timestamp    = {Thu, 13 Feb 2025 16:56:43 +0100},
+}"""
+
 jigsaw_bias = """@misc{jigsaw_bias,
   author = {cjadams and
             Daniel Borkan and
@@ -532,6 +574,23 @@ mitre = """@article{mitre,
   eprinttype    = {arXiv},
   eprint       = {2404.13161},
   timestamp    = {Fri, 19 Apr 2024 11:04:35 +0200},
+}"""
+
+niche_hazard_qa = """@inproceedings{niche_hazard_qa,
+  author       = {Rima Hazra and
+                  Sayan Layek and
+                  Somnath Banerjee and
+                  Soujanya Poria},
+  title        = {Sowing the Wind, Reaping the Whirlwind: The Impact of Editing Language
+                  Models},
+  booktitle    = {Findings of the Association for Computational Linguistics, {ACL} 2024,
+                  Bangkok, Thailand and virtual meeting, August 11-16, 2024},
+  pages        = {16227--16239},
+  publisher    = {Association for Computational Linguistics},
+  year         = {2024},
+  url          = {https://doi.org/10.18653/v1/2024.findings-acl.960},
+  doi          = {10.18653/V1/2024.FINDINGS-ACL.960},
+  timestamp    = {Wed, 09 Oct 2024 07:38:21 +0200},
 }"""
 
 offenseval = """@inproceedings{offenseval,
@@ -746,6 +805,23 @@ swad = """@article{swad,
   url          = {https://doi.org/10.1007/s10579-022-09582-8},
   doi          = {10.1007/S10579-022-09582-8},
   timestamp    = {Sat, 13 May 2023 01:06:46 +0200},
+}"""
+
+tech_hazard_qa = """@inproceedings{tech_hazard_qa,
+  author       = {Somnath Banerjee and
+                  Sayan Layek and
+                  Rima Hazra and
+                  Animesh Mukherjee},
+  title        = {How (Un)ethical Are Instruction-Centric Responses of LLMs? Unveiling
+                  the Vulnerabilities of Safety Guardrails to Harmful Queries},
+  booktitle    = {Proceedings of the Nineteenth International {AAAI} Conference on Web
+                  and Social Media, June 23-26, 2025, Copenhagen, Denmark},
+  pages        = {193--205},
+  publisher    = {{AAAI} Press},
+  year         = {2025},
+  url          = {https://doi.org/10.1609/icwsm.v19i1.35811},
+  doi          = {10.1609/ICWSM.V19I1.35811},
+  timestamp    = {Tue, 10 Jun 2025 16:54:35 +0200},
 }"""
 
 toxic_chat = """@inproceedings{toxic_chat,
