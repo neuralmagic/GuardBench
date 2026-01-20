@@ -116,6 +116,54 @@ We also implement a version with vLLM's Python interface via LLM class. This one
 | ToxiGen                   | (0.783, 0.761)                | (0.782, 0.764)                     | (0.783, 0.764)                    |
 | XSTest                    | (0.817, 0.825)                | (0.814, 0.820)                     | (0.814, 0.820)                    |
 
+
+## Llama-Guard-4-12B
+
+Now we report `(F1, Recall)` scores for the new model `meta-llama/Llama-Guard-4-12B` with both, transformers and vllm backend. Transformers results are obtained by running `python transformers_mm_eval.py` and vllm results by serving the model with `vllm serve meta-llama/Llama-Guard-4-12B -tp 1 --api-key EMPTY --logprobs-mode processed_logits --max-logprobs 10 --max-model-len 131072` and `python vllm_server_mm_eval.py --model meta-llama/Llama-Guard-4-12B --datasets all --output_dir output_dir/Llama-Guard-4-12B --top_logprobs 10 --logit_bias_strength 0.0`. In the `vllm_server_mm_eval.py` we can't use the logit-bias trick as we did in the section above because `Llama-Guard-4-12B` tends not to produce `safe/unsafe` as the very first token but rather some formatting tokens like `\n\n`. Because of this we generate at most 5 tokens and iterate through them until we find the first instance of `safe/unsafe`, which we then use to calculate probs for F1/Recall.
+
+| Dataset                   | Transformers | vLLM server |
+|---------------------------|--------------|-----------------|
+| AART                      | (0.874, 0.776) | (0.874, 0.776) |
+| AdvBench Behaviors        | (0.964, 0.931) | (0.964, 0.931) |
+| AdvBench Strings          | (0.830, 0.709) | (0.830, 0.709) |
+| BeaverTails 330k          | (0.732, 0.591) | (0.732, 0.591) |
+| Bot-Adversarial Dialogue  | (0.513, 0.377) | (0.513, 0.376) |
+| CatQA                     | (0.932, 0.873) | (0.932, 0.873) |
+| ConvAbuse                 | (0.237, 0.148) | (0.241, 0.148) |
+| DecodingTrust Stereotypes | (0.589, 0.418) | (0.591, 0.419) |
+| DICES 350                 | (0.118, 0.063) | (0.118, 0.063) |
+| DICES 990                 | (0.219, 0.135) | (0.219, 0.135) |
+| Do Anything Now Questions | (0.746, 0.595) | (0.746, 0.595) |
+| DoNotAnswer               | (0.549, 0.378) | (0.546, 0.376) |
+| DynaHate                  | (0.604, 0.481) | (0.603, 0.481) |
+| HarmEval                  | (0.560, 0.389) | (0.560, 0.389) |
+| HarmBench Behaviors       | (0.961, 0.925) | (0.959, 0.922) |
+| HarmfulQ                  | (0.860, 0.755) | (0.860, 0.755) |
+| HarmfulQA Questions       | (0.588, 0.416) | (0.588, 0.416) |
+| HarmfulQA                 | (0.375, 0.231) | (0.374, 0.231) |
+| HateCheck                 | (0.782, 0.667) | (0.782, 0.667) |
+| Hatemoji Check            | (0.626, 0.475) | (0.625, 0.474) |
+| HEx-PHI                   | (0.964, 0.930) | (0.966, 0.933) |
+| I-CoNa                    | (0.833, 0.713) | (0.837, 0.719) |
+| I-Controversial           | (0.596, 0.425) | (0.596, 0.425) |
+| I-MaliciousInstructions   | (0.824, 0.700) | (0.824, 0.700) |
+| I-Physical-Safety         | (0.493, 0.340) | (0.493, 0.340) |
+| JBB Behaviors             | (0.866, 0.870) | (0.860, 0.860) |
+| MaliciousInstruct         | (0.953, 0.910) | (0.953, 0.910) |
+| MITRE                     | (0.664, 0.497) | (0.663, 0.495) |
+| NicheHazardQA             | (0.460, 0.299) | (0.460, 0.299) |
+| OpenAI Moderation Dataset | (0.740, 0.789) | (0.739, 0.787) |
+| ProsocialDialog           | (0.426, 0.275) | (0.427, 0.276) |
+| SafeText                  | (0.375, 0.257) | (0.372, 0.254) |
+| SimpleSafetyTests         | (0.985, 0.970) | (0.985, 0.970) |
+| StrongREJECT Instructions | (0.910, 0.836) | (0.910, 0.836) |
+| TDCRedTeaming             | (0.947, 0.900) | (0.947, 0.900) |
+| TechHazardQA              | (0.759, 0.611) | (0.758, 0.610) |
+| Toxic Chat                | (0.433, 0.519) | (0.433, 0.519) |
+| ToxiGen                   | (0.459, 0.315) | (0.460, 0.315) |
+| XSTest                    | (0.834, 0.780) | (0.834, 0.780) |
+
+
 <div align="center">
   <img src="https://repository-images.githubusercontent.com/837144095/8190ad0e-e9ff-4dda-9116-644d62d6b886">
 </div>
