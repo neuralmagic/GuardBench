@@ -1,6 +1,3 @@
-import os
-os.environ["HF_HUB_CACHE"] = "/home/eldarkurtic/hf_hub_cache"
-os.environ["TRANSFORMERS_CACHE"] = "/home/eldarkurtic/transformers_cache"
 from argparse import ArgumentParser
 import torch
 from openai import OpenAI

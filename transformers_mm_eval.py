@@ -1,9 +1,3 @@
-import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "3"
-os.environ["PYDEVD_WARN_SLOW_RESOLVE_TIMEOUT"] = "10000"
-os.environ["HF_HUB_CACHE"] = "/home/eldarkurtic/hf_hub_cache"
-os.environ["TRANSFORMERS_CACHE"] = "/home/eldarkurtic/transformers_cache"
-
 import torch
 from transformers import Llama4ForConditionalGeneration, AutoProcessor
 from guardbench import benchmark
